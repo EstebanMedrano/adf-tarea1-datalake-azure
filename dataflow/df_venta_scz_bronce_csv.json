@@ -1,5 +1,5 @@
 {
-	"name": "df_venta_scz_bronce_silver",
+	"name": "df_venta_scz_bronce_csv",
 	"properties": {
 		"folder": {
 			"name": "Bronze"
@@ -19,6 +19,15 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "derivedColumn4"
 				}
 			],
 			"scriptLines": [
@@ -46,7 +55,11 @@
 				"          sucursal = trim(sucursal),",
 				"          cliente_nombre = trim(cliente_nombre),",
 				"          cliente_email = trim(cliente_email),",
-				"          metodo_pago = trim(metodo_pago)) ~> derivedColumn1"
+				"          metodo_pago = trim(metodo_pago)) ~> derivedColumn1",
+				"derivedColumn1 derive(producto = initCap(regexReplace(producto,'\\\\s+',' '))) ~> derivedColumn2",
+				"derivedColumn2 derive(sucursal = iif(in(['SCZ','Sta Cruz','santa cruz','sta. Cruz','SC','SANTA CRUZ','Sta. Cruz'],sucursal), 'Santa Cruz',sucursal)) ~> derivedColumn3",
+				"derivedColumn3 derive(precio_unitario = toFloat(regexReplace(toString(precio_unitario),'[^0-9.]',''))\r",
+				") ~> derivedColumn4"
 			]
 		}
 	}
