@@ -1,10 +1,6 @@
 {
 	"name": "ventas_online_json",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "datalake_ventas",
-			"type": "LinkedServiceReference"
-		},
 		"folder": {
 			"name": "bronze"
 		},
